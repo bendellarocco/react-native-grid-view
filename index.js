@@ -52,6 +52,7 @@ var CollectionView = React.createClass({
           onEndReached={this.props.onEndReached}
           scrollEnabled={this.props.scrollEnabled}
           renderHeader={this.props.renderHeader}
+          renderFooter={this.props.renderFooter}
           pageSize={this.props.pageSize | 1}
         />);
     },
