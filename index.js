@@ -49,7 +49,7 @@ export default class CollectionView extends Component{
         var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         return (<ListView
           dataSource={ds.cloneWithRows(groups)}
-          renderRow={this.renderGroup}
+          renderRow={this.renderGroup.bind(this)}
           style={this.props.style}
           onEndReached={this.props.onEndReached}
           scrollEnabled={this.props.scrollEnabled}
