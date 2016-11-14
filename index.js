@@ -1,16 +1,15 @@
 'use strict';
+import React, { Component } from 'react';
 
-var React = require('react-native');
-
-var {
+import {
   AppRegistry,
   View,
   StyleSheet,
   ListView,
-} = React;
+} from 'react-native';
 
-var CollectionView = React.createClass({
-    groupItems: function(items, itemsPerRow) {
+export default class CollectionView extends Component{
+    groupItems(items, itemsPerRow) {
         var itemsGroups = [];
         var group = [];
         items.forEach(function(item) {
@@ -27,11 +26,13 @@ var CollectionView = React.createClass({
         }
 
         return itemsGroups;
-    },
-    getInitialState: function() {
-        return {items: [], renderItem: null, style: undefined, itemsPerRow: 1, onEndReached: undefined};
-    },
-    renderGroup: function(group) {
+    }
+        constructor(props) {
+          super(props);
+          this.state = {items: [], renderItem: null, style: undefined, itemsPerRow: 1, onEndReached: undefined};
+    }
+
+    renderGroup(group) {
       var that = this;
       var items = group.map(function(item, index) {
         return that.props.renderItem(item, index);
@@ -41,8 +42,9 @@ var CollectionView = React.createClass({
           {items}
         </View>
       );
-    },
-    render: function() {
+    }
+
+    render() {
         var groups = this.groupItems(this.props.items, this.props.itemsPerRow);
         var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         return (<ListView
@@ -55,8 +57,8 @@ var CollectionView = React.createClass({
           renderFooter={this.props.renderFooter}
           pageSize={this.props.pageSize | 1}
         />);
-    },
-});
+    }
+};
 
 
 var styles = StyleSheet.create({
